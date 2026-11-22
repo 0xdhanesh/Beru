@@ -1,0 +1,28 @@
+# Local development configuration and data
+.localdev/
+
+# Environment variables and local secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Operating system metadata
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Local editor settings and temporary files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs and temporary working directories
+*.log
+/tmp/
+/temp/
+.cache/
