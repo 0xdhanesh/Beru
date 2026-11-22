@@ -4,7 +4,24 @@ Let the fun(c) begin...
 
 Beru is a collection of planned, intentionally vulnerable C and C++ labs for learning secure coding and practicing reverse engineering. Each lab will isolate a memory safety issue or a related exploitation technique so its behavior can be compared across architectures and build profiles.
 
-The repository currently contains this catalog; lab source code, build scripts, and compiled binaries have not been added. Every source path below is **planned**, not an existing file. The catalog covers common families and representative variants, rather than every allocator-specific or platform-specific technique.
+The repository contains this catalog and a [Docker-based C/C++ compiler](docker/compiler/README.md) with unprotected and hardened build profiles. Lab source code has not been added; the programs in `tests/fixtures/` are harmless compiler smoke tests. Every source path in the catalog below is **planned**, not an existing file. The catalog covers common families and representative variants, rather than every allocator-specific or platform-specific technique.
+
+## Compile with Docker
+
+Install Docker with a running Linux container engine, then run:
+
+```bash
+# Build the compiler image and produce both profiles for Linux x86_64.
+./scripts/compile.sh tests/fixtures/hello.c
+
+# Cross-compile both profiles for all six supported targets.
+./scripts/compile.sh --target all tests/fixtures/hello.c
+
+# Compile a C++ program for Windows x86_64 using only the hardened profile.
+./scripts/compile.sh --target windows-x86_64 --profile hardened tests/fixtures/hello.cpp
+```
+
+Binaries and verified JSON build reports are written to `build/<target>/<profile>/` and ignored by Git. See the [compiler guide](docker/compiler/README.md) for the exact protections, custom sources, supported targets, limitations, and validation commands.
 
 ## Memory corruption catalog
 
@@ -71,7 +88,7 @@ Microsoft's [exploit protection reference](https://learn.microsoft.com/en-us/def
 
 ## Planned build matrix
 
-Each supported lab is intended to have two profiles for each applicable target: **stripped with binary protections** and **unstripped without optional binary protections**. This is a target plan, not a statement of current build support.
+Each supported lab is intended to have two profiles for each applicable target: **stripped with binary protections** and **unstripped without optional binary protections**. The compiler currently supports Linux x86, x86_64, ARM hard-float, and ARM64, plus Windows x86 and x86_64. The broader Unix-like and Windows ARM targets below remain planned.
 
 | Architecture | Planned OS targets | Planned profiles |
 | ------------ | ------------------ | ---------------- |

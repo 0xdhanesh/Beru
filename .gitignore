@@ -26,3 +26,8 @@ Desktop.ini
 /tmp/
 /temp/
 .cache/
+
+# Generated lab binaries and build reports
+/build/
+__pycache__/
+*.py[cod]
