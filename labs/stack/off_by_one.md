@@ -14,7 +14,7 @@ if (length > sizeof(buffer) + 1) {
 
 The extra `+ 1` makes the maximum accepted length 65. At that length, `memcpy(buffer, input, length)` writes 64 bytes inside `buffer[0..63]` and one data byte outside it. Lengths of 66 bytes and above are rejected before copying, so this example isolates a single-byte overflow rather than an unrestricted copy. This is an [off-by-one error (CWE-193)](https://cwe.mitre.org/data/definitions/193.html) leading to a [stack-based buffer overflow (CWE-121)](https://cwe.mitre.org/data/definitions/121.html).
 
-The correction removes `+ 1` from the capacity check. The buffer holds raw bytes, not a NUL-terminated string: the program deliberately does not copy the terminator, and prints using `fwrite` with an explicit byte count. Thus 64 input bytes fit. The overflow byte at length 65 is an input data byte, which distinguishes this lab from the separately planned off-by-null lab. Lengths count bytes, not Unicode characters; command-line strings cannot contain embedded NULs.
+The correction removes `+ 1` from the capacity check. The buffer holds raw bytes, not a NUL-terminated string: the program deliberately does not copy the terminator, and prints using `fwrite` with an explicit byte count. Thus 64 input bytes fit. The overflow byte at length 65 is an input data byte, which distinguishes this lab from the [off-by-null lab](off_by_null.md). Lengths count bytes, not Unicode characters; command-line strings cannot contain embedded NULs.
 
 The vulnerable version limits its output to 64 bytes to avoid introducing an additional out-of-bounds read after the faulty write. Undefined behavior has already occurred at the write, so even that output is not guaranteed.
 
