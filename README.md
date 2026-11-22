@@ -4,7 +4,7 @@ Let the fun(c) begin...
 
 Beru is a collection of planned, intentionally vulnerable C and C++ labs for learning secure coding and practicing reverse engineering. Each lab will isolate a memory safety issue or a related exploitation technique so its behavior can be compared across architectures and build profiles.
 
-The repository contains this catalog and a [Docker-based C/C++ compiler](docker/compiler/README.md) with unprotected and hardened build profiles. Lab source code has not been added; the programs in `tests/fixtures/` are harmless compiler smoke tests. Every source path in the catalog below is **planned**, not an existing file. The catalog covers common families and representative variants, rather than every allocator-specific or platform-specific technique.
+The repository contains this catalog, a [Docker-based C/C++ compiler](docker/compiler/README.md), and the [classic stack buffer overflow lab](labs/stack/classic_overflow.md) with a length-checked correction. Entries marked **Planned** have no implementation yet. The programs in `tests/fixtures/` are harmless compiler smoke tests. The catalog covers common families and representative variants, rather than every allocator-specific or platform-specific technique.
 
 ## Compile with Docker
 
@@ -29,7 +29,7 @@ Binaries and verified JSON build reports are written to `build/<target>/<profile
 
 | MEMORY CORRUPTION | Applicable OS | Source |
 | ----------------- | ------------- | ------ |
-| Classic stack buffer overflow — unchecked copy into a stack buffer | Windows / Unix-like | Planned: `labs/stack/classic_overflow.c` |
+| Classic stack buffer overflow — unchecked copy into a stack buffer | Windows / Unix-like | [Vulnerable source](labs/stack/classic_overflow.c), [fixed source](labs/stack/classic_overflow_fixed.c), [lab guide](labs/stack/classic_overflow.md) |
 | Stack off-by-one overflow — one byte beyond a stack buffer | Windows / Unix-like | Planned: `labs/stack/off_by_one.c` |
 | Stack off-by-null overflow — terminating NUL written beyond a stack buffer | Windows / Unix-like | Planned: `labs/stack/off_by_null.c` |
 | Stack buffer underflow — write before the start of a stack buffer | Windows / Unix-like | Planned: `labs/stack/buffer_underflow.c` |
